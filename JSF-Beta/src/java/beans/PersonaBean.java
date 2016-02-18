@@ -23,8 +23,8 @@ public class PersonaBean {
      * Creates a new instance of PersonaBean
      */
     
-    Persona person = new Persona(); 
-    List<Persona> listPersonas = new ArrayList<Persona>();
+    private Persona person = new Persona(); 
+    private static List<Persona>  listPersonas = new ArrayList<Persona>();
         
     public PersonaBean() {
     }
@@ -42,14 +42,14 @@ public class PersonaBean {
     }
 
     public void setListPersonas(List<Persona> listPersonas) {
-        this.listPersonas = listPersonas;
+        PersonaBean.listPersonas = listPersonas;
     }
     
     public void agregarPersona(){
-    this.listPersonas.add(person);    
+    PersonaBean.listPersonas.add(person);    
     }
     
-    public void eliminarPersona(){
-    this.listPersonas.remove(person);    
+    public void eliminarPersona(Persona per){
+    PersonaBean.listPersonas.remove(per);    
     }
 }
