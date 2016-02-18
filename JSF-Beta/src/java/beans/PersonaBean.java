@@ -52,4 +52,8 @@ public class PersonaBean {
     public void eliminarPersona(Persona per){
     PersonaBean.listPersonas.remove(per);    
     }
+    
+    public void modificarPersona(Persona per){
+    PersonaBean.listPersonas.remove(per);    
+    }
 }

@@ -26,17 +26,21 @@
             <h:commandButton value ="Agregar" actionListener="#{personaBean.agregarPersona()}"/>
             
             <h:dataTable value="#{personaBean.listPersonas}" var="per">
+                
                 <h:column>
                     <h:outputLabel value="#{per.name}"/>
-                    
                 </h:column>
-                
+
                 <h:column>
                     <h:outputLabel value="#{per.lastName}"/>
                 </h:column>
-                
+               
                 <h:column>
                     <h:outputLabel value="#{per.sexo}"/>
+                </h:column>
+                
+                <h:column>
+                    <h:commandLink value="Eliminar"  actionListener="#{personaBean.eliminarPersona(per)}"/>
                 </h:column>
                     
             </h:dataTable>  
