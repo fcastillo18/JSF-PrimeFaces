@@ -8,39 +8,55 @@
     </h:head>
     <h:body>
         <h:form>
-            <h:panelGrid columns = "2">
-                <h:outputLabel value ="Nombre"/>
-                <h:inputText value ="#{personaBean.person.name}"/>  
+            <h:panelGrid columns = "3">
                 
-                <h:outputLabel value ="Apellido"/>
-                <h:inputText value ="#{personaBean.person.lastName}"/>
+                <h:outputLabel value ="Nombre"/>
+                <h:inputText id="txtNombre" value ="#{personaBean.person.name}" required="true" label="Nombre requerido"/>  
+                <h:messages for="txtNombre"/>
+                
+                <h:outputLabel value ="Edad"/>
+                <h:inputText id="txtEdad" value ="#{personaBean.person.edad}" required="true" label="1-8">
+                    <f:validateLongRange for="txtEdad" minimum="1" maximum="18"/>
+                </h:inputText> 
+                <h:messages for="txtEdad"/>
                 
                 <h:outputLabel value ="Sexo"/>
-                <h:selectOneMenu value ="#{personaBean.person.sexo}"> 
-                    <f:selectItem itemValue="M" itemLabel="Masculino"/>
+                <h:selectOneMenu id="cbSexo" value ="#{personaBean.person.sexo}" required="true"> 
+                    <f:selectItem itemValue="M" itemLabel="Masculino"/> 
                     <f:selectItem itemValue="F" itemLabel="Femenino"/>
                 </h:selectOneMenu>
+                <h:messages for="cbSexo"/>
                 
             </h:panelGrid>    
             
             <h:commandButton value ="Agregar" actionListener="#{personaBean.agregarPersona()}"/>
+            <h:commandButton value ="Agregar in validar" actionListener="#{personaBean.agregarPersona()}"/>
             
-            <h:dataTable value="#{personaBean.listPersonas}" var="per">
-                
+            <h:dataTable value="#{personaBean.listPersonas}" var="per" rendered="#{personaBean.listPersonas.size() > 0 eq true}">
+                               
                 <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel value="Nombre"/>                    
+                    </f:facet>   
                     <h:outputLabel value="#{per.name}"/>
                 </h:column>
-
+                
                 <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel value="Apellido"/>                    
+                    </f:facet>   
                     <h:outputLabel value="#{per.lastName}"/>
                 </h:column>
                
                 <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel value="Sexo"/>                    
+                    </f:facet>   
                     <h:outputLabel value="#{per.sexo}"/>
                 </h:column>
                 
                 <h:column>
-                    <h:commandLink value="Eliminar"  actionListener="#{personaBean.eliminarPersona(per)}"/>
+                    <h:commandLink value="Eliminar" actionListener="#{personaBean.eliminarPersona(per)}"/>
                 </h:column>
                     
             </h:dataTable>  

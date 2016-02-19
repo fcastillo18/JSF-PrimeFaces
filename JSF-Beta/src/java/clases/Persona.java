@@ -14,6 +14,7 @@ public class Persona {
     private String name = "";
     private String lastName = "";
     private String sexo = "";
+    private int edad = 0;
     
     public Persona() {
     }
@@ -40,6 +41,14 @@ public class Persona {
     
     public void setSexo(String sexo) {
         this.sexo = sexo;
+    }
+    
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
     }
     
     @Override

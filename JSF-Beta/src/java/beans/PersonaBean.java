@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -53,7 +55,12 @@ public class PersonaBean {
     PersonaBean.listPersonas.remove(per);    
     }
     
-    public void modificarPersona(Persona per){
-    PersonaBean.listPersonas.remove(per);    
+    // 1-tener acceso a todas la variables manejadas en JSF, 2- desde donde
+    //se va a invocar la accion o llamado a este metodo
+    //3- el valor que trae este evento
+    public void validar(FacesContext context, 
+                        UIComponent toValidate, Object value){
+        context = FacesContext.getCurrentInstance();
+        String texto = (String) value;
     }
 }
