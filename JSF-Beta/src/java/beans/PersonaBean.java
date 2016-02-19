@@ -11,6 +11,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 
 /**
@@ -62,5 +63,10 @@ public class PersonaBean {
                         UIComponent toValidate, Object value){
         context = FacesContext.getCurrentInstance();
         String texto = (String) value;
+        
+        if (!texto.equalsIgnoreCase("M") && !texto.equalsIgnoreCase("F")) {
+            //vamos a dejar inoperativo al componente que hizo el llamado a este metodo.
+            ((UIInput)toValidate).setValid(false);
+        }
     }
 }
