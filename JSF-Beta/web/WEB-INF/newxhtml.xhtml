@@ -18,5 +18,10 @@ and open the template in the editor.
                 <h:inputText id="txtApellido" value ="#{personaBean.person.lastName}"/>
                 -->
         
+                <h:outputLabel value ="Sexo" />       
+                <h:inputText id="txtSexo" value="#{personaBean.person.sexo}" validator="#{personaBean.validar}"/>
+                <h:messages for="txtSexo" style="color :red"/>
+                
+                
     </body>
 </html>

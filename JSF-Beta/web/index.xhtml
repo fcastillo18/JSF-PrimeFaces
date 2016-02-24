@@ -8,17 +8,27 @@
     </h:head>
     <h:body>
         <h:form>
+            <!-- Al usar esta etiqueta <h:messages /> , muestro un msj global de todos
+            los errores y no uno en cada caja de texto-->
+            <h:messages />
+            
+            <!--EL metodo validar recibe paramentros pero estos son pasados explicitamente, asi que no hay qu eponer parentesis -->
+            
             <h:panelGrid columns = "3">
                 
                 <h:outputLabel value ="Nombre"/>
-                <h:inputText id="txtNombre" value ="#{personaBean.person.name}" required="true" label="Nombre requerido"/>  
-                <h:messages for="txtNombre"/>
+                <h:inputText id="txtNombre" value ="#{personaBean.person.name}" required="true" label="Nombre requerido" />  
+                <h:messages for="txtNombre" style="color :red"/>
                 
                 <h:outputLabel value ="Edad"/>
                 <h:inputText id="txtEdad" value ="#{personaBean.person.edad}" required="true" label="1-8">
-                    <f:validateLongRange for="txtEdad" minimum="1" maximum="18"/>
+                    <f:validator validatorId="EdadValidator"/>
                 </h:inputText> 
-                <h:messages for="txtEdad"/>
+                <h:messages for="txtEdad" style="color :red"/>
+                 
+                <h:outputLabel value ="Sexo" />       
+                <h:inputText id="txtSexo" value="#{personaBean.person.sexo}" validator="#{personaBean.validar}"/>                
+                <h:messages for="txtSexo" style="color :red"/>
                 
                 <h:outputLabel value ="Sexo"/>
                 <h:selectOneMenu id="cbSexo" value ="#{personaBean.person.sexo}" required="true"> 
@@ -30,7 +40,7 @@
             </h:panelGrid>    
             
             <h:commandButton value ="Agregar" actionListener="#{personaBean.agregarPersona()}"/>
-            <h:commandButton value ="Agregar in validar" actionListener="#{personaBean.agregarPersona()}"/>
+            <h:commandButton value ="Agregar sin validar" actionListener="#{personaBean.agregarPersona()}" immediate="true"/>
             
             <h:dataTable value="#{personaBean.listPersonas}" var="per" rendered="#{personaBean.listPersonas.size() > 0 eq true}">
                                
@@ -48,6 +58,13 @@
                     <h:outputLabel value="#{per.lastName}"/>
                 </h:column>
                
+                
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel value="Edad"/>                    
+                    </f:facet>   
+                    <h:outputLabel  value ="#{per.edad}"/>
+                </h:column>
                 <h:column>
                     <f:facet name="header">
                         <h:outputLabel value="Sexo"/>                    

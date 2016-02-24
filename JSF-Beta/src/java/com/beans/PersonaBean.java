@@ -3,14 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package beans;
+package com.beans;
 
-import clases.Persona;
+import com.clases.Persona;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 
 /**
@@ -60,7 +62,16 @@ public class PersonaBean {
     //3- el valor que trae este evento
     public void validar(FacesContext context, 
                         UIComponent toValidate, Object value){
+        //capturar el contexto
         context = FacesContext.getCurrentInstance();
+        //obtener el valor de ese componente
         String texto = (String) value;
+        //luego de capturar el valor evaluar o aplicar una logica cuando no sea M o F
+        if (!texto.equalsIgnoreCase("M") && !texto.equalsIgnoreCase("F")) {
+            //dejar inoperativo al componente que hizo el llamado a este metodo
+            ((UIInput)toValidate).setValid(true);
+            context.addMessage(toValidate.getClientId(), new FacesMessage("Sexo no es correcto"));
+        }
+          //asignar ese metodo validar al input text en el index      
     }
 }
